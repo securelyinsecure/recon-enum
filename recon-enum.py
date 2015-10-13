@@ -7,24 +7,23 @@ import subprocess
 import requests
 
 """Subdomain enumeration script that creates/uses a dynamic resource script for recon-ng.
- only 1 module needs api’s (/api/google_site) find instructions for that on the wiki.
- uses google scraping, bing scraping, baidu scraping, netcraft, and bruteforces to find subdomains.
- oringal by @jhaddix
- https://github.com/jhaddix/domain
-"""
-""" Additional funtionality added to toggle subdomain bruteforce (-B), domain suffix (-S)
-    host-host/resolve, hosts-hosts/reverse_resolve
+only 1 module needs api’s (/api/google_site) find instructions for that on the wiki.
+uses google scraping, bing scraping, baidu scraping, netcraft, and bruteforces to find subdomains.
+oringal by @jhaddix
+https://github.com/jhaddix/domainAdditional
+Addional funtionality and port to python by @securelyinsecure o toggle subdomain bruteforce (-B), domain suffix (-S)
+host-host/resolve, hosts-hosts/reverse_resolve
 """
 
 
 
 parser = argparse.ArgumentParser(description='A small python script to create and run a domain'
-                                             'through recon-ng')
-parser.add_argument('-d', '--domain', help='specify a domain')
-parser.add_argument('-B', '--brute', action='store_true')
-parser.add_argument('-S', '--suffix', action='store_true')
-parser.add_argument('-R', '--reverse_resolve', action='store_true')
-parser.add_argument('--reset_workspace', action='store_true')
+                                             ' through recon-ng.  Based on original enum.sh script by @jhaddix')
+parser.add_argument('-d', '--domain', help='specify a domain', required='True')
+parser.add_argument('-B', '--brute', action='store_true', help='Toggle Brute force of subdomains (default=false)')
+parser.add_argument('-S', '--suffix', action='store_true', help='Toggle Brute force of domain suffix (default=false)')
+parser.add_argument('-R', '--reverse_resolve', action='store_true', help='Toggle reverse dns lookups of hosts (default=false)')
+parser.add_argument('--reset_workspace', action='store_true', help='Reset recon-ng workspace for domain (default=false)')
 args = parser.parse_args()
 
 domain = args.domain
